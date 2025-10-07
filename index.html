@@ -3,18 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- DIOPTIMALKAN: Menambahkan meta deskripsi untuk SEO -->
+    <meta name="description" content="Dashboard Kinerja Digital Wakil Direktur II di Politeknik Kesehatan Kemenkes Kupang.">
+
     <title>Dashboard Kinerja Wadir 2 | Poltekkes Kemenkes Kupang</title>
 
-    <!-- Google Fonts: Poppins untuk tipografi modern -->
+    <!-- DIOPTIMALKAN: Preconnect & DNS-Prefetch untuk mempercepat koneksi ke domain eksternal -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="dns-prefetch" href="https://cdnjs.cloudflare.com">
+    <link rel="dns-prefetch" href="https://unpkg.com">
+
+    <!-- DIOPTIMALKAN: Google Fonts dimuat dengan display=swap untuk mencegah teks kosong -->
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
 
+    <!-- DIOPTIMALKAN: Memuat CSS secara asinkron agar tidak memblokir render halaman -->
     <!-- Font Awesome untuk ikon-ikon menarik -->
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"></noscript>
 
     <!-- AOS (Animate On Scroll) Library untuk animasi halus -->
-    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+    <link rel="preload" href="https://unpkg.com/aos@next/dist/aos.css" as="style" onload="this.onload=null;this.rel='stylesheet'">
+    <noscript><link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" /></noscript>
 
     <style>
         /* CSS Variables untuk Tema Warna Terang */
@@ -207,9 +217,10 @@
     <!-- Bagian Header Utama -->
     <header class="header" data-aos="fade-down" data-aos-duration="1000">
         <div class="container">
-            <!-- GANTI DENGAN URL TUJUAN & URL GAMBAR LOGO ANDA -->
+            <!-- PENTING: Ganti dengan URL GAMBAR LOGO ANDA yang sudah dioptimasi -->
             <a href="https://poltekkeskupang.ac.id/" target="_blank">
-                <img src="LOGO POLTEKKES KEMENKES KUPANG.png" alt="Logo Poltekkes Kemenkes Kupang" class="header-logo">
+                <!-- DIOPTIMALKAN: Menambahkan width, height, dan loading="lazy" pada gambar -->
+                <img src="LOGO POLTEKKES KEMENKES KUPANG.png" alt="Logo Poltekkes Kemenkes Kupang" class="header-logo" width="100" height="100" loading="lazy">
             </a>
 
             <h1>Dashboard Kinerja Digital</h1>
@@ -217,8 +228,9 @@
             
             <!-- Bagian Profil Pejabat -->
             <div class="profile-section">
-                <!-- GANTI DENGAN URL FOTO ANDA (sebaiknya rasio 1:1) -->
-                <img src="karolus.png" alt="Foto Profil Wakil Direktur 2" class="profile-photo">
+                <!-- PENTING: Ganti dengan URL FOTO ANDA yang sudah dioptimasi (rasio 1:1) -->
+                <!-- DIOPTIMALKAN: Menambahkan width, height, dan loading="lazy" pada gambar -->
+                <img src="karolus.png" alt="Foto Profil Wakil Direktur 2 Karolus Ngambut" class="profile-photo" width="90" height="90" loading="eager">
                 <div class="profile-identity">
                     <h4>Karolus Ngambut,SKM.,M.Kes</h4>
                     <p>Wakil Direktur II/ Penata Tingkat I, IIId</p>
@@ -298,20 +310,21 @@
 
     <!-- Footer -->
     <footer>
-        <p>&copy; 2023 | Dikelola oleh Tim Wakil Direktur II Poltekkes Kemenkes Kupang</p>
+        <p>&copy; 2025 | Dikelola oleh Tim Wakil Direktur II Poltekkes Kemenkes Kupang</p>
     </footer>
 
-    <!-- JavaScript untuk AOS (Animate On Scroll) -->
-    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <!-- DIOPTIMALKAN: Menambahkan atribut 'defer' pada script agar tidak memblokir parsing HTML -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script>
-        AOS.init({
-            duration: 800,
-            once: true,
-            offset: 50,
+        // DIOPTIMALKAN: Inisialisasi AOS dijalankan setelah halaman dimuat penuh
+        document.addEventListener("DOMContentLoaded", function() {
+            AOS.init({
+                duration: 800,
+                once: true,
+                offset: 50,
+            });
         });
     </script>
 
 </body>
-
 </html>
-
