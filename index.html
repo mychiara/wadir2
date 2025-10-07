@@ -32,6 +32,12 @@
             --color-rkt: #0096C7;
             --color-aksi: #00AFB9;
             --color-laporan: #F4A261;
+            
+            /* [BARU] Warna untuk Info Card */
+            --color-sejarah: #2980b9;
+            --color-visi: #27ae60;
+            --color-renstra: #d35400;
+            --color-moto: #8e44ad;
         }
 
         /* CSS Reset & Pengaturan Dasar */
@@ -65,8 +71,50 @@
         .section-title::after { content: ''; width: 100px; height: 4px; background: var(--primary-accent); border-radius: 2px; position: absolute; bottom: -15px; left: 50%; transform: translateX(-50%); }
 
         /* Kartu Konten Umum */
-        .card { background: var(--card-bg); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid var(--card-border); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease; }
+        .card { background: var(--card-bg); backdrop-filter: blur(10px); padding: 30px; border-radius: 20px; border: 1px solid var(--card-border); box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1); transition: transform 0.3s ease, box-shadow 0.3s ease, filter 0.3s ease; }
         .card:hover { transform: translateY(-10px); box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12); }
+
+        /* [DIUBAH] Style untuk Kartu Informasi & Grid */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 30px;
+            margin-bottom: 60px;
+        }
+        .info-card {
+            text-align: center;
+            cursor: pointer;
+            padding: 35px 25px;
+            color: #ffffff; /* [BARU] Teks default menjadi putih */
+            backdrop-filter: none; /* [BARU] Nonaktifkan blur untuk kartu berwarna */
+        }
+        .info-card .info-icon {
+            font-size: 3.5rem;
+            margin-bottom: 15px;
+            transition: transform 0.3s ease;
+            color: #ffffff; /* [BARU] Ikon menjadi putih */
+        }
+        .info-card:hover .info-icon {
+            transform: scale(1.2) rotate(-10deg);
+        }
+        .info-card h3 {
+            font-size: 1.5rem;
+            margin-bottom: 5px;
+            color: #ffffff; /* [BARU] Judul menjadi putih */
+        }
+        .info-card p {
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.85); /* [BARU] Deskripsi menjadi putih transparan */
+        }
+        /* [BARU] Penerapan Warna Kustom pada Setiap Kartu */
+        .info-card.card-sejarah { background-color: var(--color-sejarah); }
+        .info-card.card-visi { background-color: var(--color-visi); }
+        .info-card.card-renstra { background-color: var(--color-renstra); }
+        .info-card.card-moto { background-color: var(--color-moto); }
+
+        .info-card:hover {
+            filter: brightness(1.1); /* [BARU] Efek hover untuk kartu berwarna */
+        }
 
         /* Kartu IKU */
         .iku-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
@@ -94,106 +142,34 @@
         .btn-iku { background-color: var(--primary-accent); margin-left: 0; }
         .btn-iku:hover { box-shadow: 0 5px 20px rgba(13, 71, 161, 0.4); }
         
-        /* [BARU] Tema Warna Ikon Dokumen */
         .card-rkt .doc-icon { background: rgba(0, 150, 199, 0.1); color: var(--color-rkt); }
         .card-aksi .doc-icon { background: rgba(0, 175, 185, 0.1); color: var(--color-aksi); }
         .card-laporan .doc-icon { background: rgba(244, 162, 97, 0.1); color: var(--color-laporan); }
-
-        /* Style untuk Kartu Informasi & Grid */
-        .info-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 30px;
-            margin-bottom: 60px;
-        }
-        .info-card {
-            text-align: center;
-            cursor: pointer;
-            padding: 35px 25px;
-        }
-        .info-card .info-icon {
-            font-size: 3.5rem;
-            color: var(--primary-accent);
-            margin-bottom: 15px;
-            transition: transform 0.3s ease;
-        }
-        .info-card:hover .info-icon {
-            transform: scale(1.2) rotate(-10deg);
-        }
-        .info-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 5px;
-            color: var(--text-dark);
-        }
-        .info-card p {
-            color: var(--text-muted);
-            font-size: 0.9rem;
-        }
         
         /* Style untuk Modal Pop-up */
         .modal-overlay {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 1000;
-            opacity: 0;
-            visibility: hidden;
-            transition: opacity 0.3s ease, visibility 0.3s ease;
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0, 0, 0, 0.7); z-index: 1000; opacity: 0;
+            visibility: hidden; transition: opacity 0.3s ease, visibility 0.3s ease;
         }
-        .modal-overlay.active {
-            opacity: 1;
-            visibility: visible;
-        }
+        .modal-overlay.active { opacity: 1; visibility: visible; }
         .modal {
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -60%);
-            background: #fff;
-            padding: 30px;
-            border-radius: 15px;
-            z-index: 1001;
-            width: 90%;
-            max-width: 700px;
-            opacity: 0;
-            visibility: hidden;
-            transition: all 0.3s ease;
+            position: fixed; top: 50%; left: 50%;
+            transform: translate(-50%, -60%); background: #fff; padding: 30px;
+            border-radius: 15px; z-index: 1001; width: 90%; max-width: 700px;
+            opacity: 0; visibility: hidden; transition: all 0.3s ease;
             box-shadow: 0 10px 40px rgba(0,0,0,0.2);
         }
-        .modal.active {
-            transform: translate(-50%, -50%);
-            opacity: 1;
-            visibility: visible;
+        .modal.active { transform: translate(-50%, -50%); opacity: 1; visibility: visible; }
+        .modal-header { display: flex; justify-content: space-between; align-items: center;
+            border-bottom: 1px solid #eee; padding-bottom: 15px; margin-bottom: 20px;
         }
-        .modal-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            border-bottom: 1px solid #eee;
-            padding-bottom: 15px;
-            margin-bottom: 20px;
-        }
-        .modal-title {
-            font-size: 1.8rem;
-            color: var(--primary-accent);
-        }
-        .modal-close-btn {
-            font-size: 2rem;
-            background: none;
-            border: none;
-            cursor: pointer;
-            color: #888;
-            transition: color 0.2s;
+        .modal-title { font-size: 1.8rem; color: var(--primary-accent); }
+        .modal-close-btn { font-size: 2rem; background: none; border: none; cursor: pointer;
+            color: #888; transition: color 0.2s;
         }
         .modal-close-btn:hover { color: #333; }
-        .modal-body {
-            max-height: 60vh;
-            overflow-y: auto;
-            padding-right: 15px; /* Memberi ruang untuk scrollbar */
-        }
+        .modal-body { max-height: 60vh; overflow-y: auto; padding-right: 15px; }
         .modal-body p { margin-bottom: 15px; }
         .modal-body ul { list-style-position: inside; padding-left: 10px; }
         .modal-body li { margin-bottom: 10px; }
@@ -236,29 +212,29 @@
 
     <main class="container">
 
-        <!-- Bagian Info Sejarah, Visi & Misi -->
+        <!-- [DIKEMBALIKAN & DIMODIFIKASI] Bagian Info dengan Kotak Berwarna & Pop-up -->
         <section id="profil-institusi">
             <div class="info-grid">
                 <!-- Kartu Sejarah -->
-                <div class="card info-card" data-aos="fade-right" data-modal-target="sejarah">
+                <div class="card info-card card-sejarah" data-aos="fade-right" data-modal-target="sejarah">
                     <div class="info-icon"><i class="fas fa-landmark"></i></div>
                     <h3>Sejarah</h3>
                     <p>Perjalanan Poltekkes Kupang dari awal berdiri hingga kini.</p>
                 </div>
                 <!-- Kartu Visi Misi -->
-                <div class="card info-card" data-aos="fade-up" data-modal-target="visi-misi">
+                <div class="card info-card card-visi" data-aos="fade-up" data-aos-delay="100" data-modal-target="visi-misi">
                     <div class="info-icon"><i class="fas fa-bullseye"></i></div>
                     <h3>Visi & Misi</h3>
                     <p>Arah dan tujuan jangka panjang institusi kami.</p>
                 </div>
                  <!-- Kartu Renstra -->
-                <div class="card info-card" data-aos="fade-down" data-modal-target="renstra">
+                <div class="card info-card card-renstra" data-aos="fade-up" data-aos-delay="200" data-modal-target="renstra">
                     <div class="info-icon"><i class="fas fa-sitemap"></i></div>
                     <h3>Rencana Strategis</h3>
                     <p>Peta jalan strategis untuk mencapai visi dan misi institusi.</p>
                 </div>
                 <!-- Kartu Moto & Layanan -->
-                <div class="card info-card" data-aos="fade-left" data-modal-target="moto-layanan">
+                <div class="card info-card card-moto" data-aos="fade-left" data-aos-delay="300" data-modal-target="moto-layanan">
                     <div class="info-icon"><i class="fas fa-hands-holding-circle"></i></div>
                     <h3>Moto & Layanan</h3>
                     <p>Semangat kami dalam memberikan pelayanan terbaik.</p>
@@ -281,7 +257,6 @@
                         <li>Meningkatnya Serapan Lulusan</li>
                         <li>Meningkatnya Prestasi Dosen dan Mahasiswa</li>
                         <li>Meningkatnya Kualitas Kelembagaan</li>
-
                     </ul>
                     <div class="iku-button-container">
                         <a href="https://drive.google.com/file/d/14xck6mz9SGL72T5GH5cJf_ZVd9HNHavq/view?usp=sharing" class="download-btn btn-iku"><i class="fas fa-file-pdf"></i>Unduh Detail IKU</a>
@@ -290,21 +265,20 @@
                 <div class="card iku-card" data-aos="fade-left" data-aos-delay="400">
                     <h3><i class="fas fa-user-tie"></i>IKU Wadir 2</h3>
                     <ul>
-<li>Margin EBITDA</li>
-<li>Realisasi Pendapatan Operasional BLU</li>
-<li>Jumlah Pendapatan BLU dari Optimalisasi Aset dan Kerja Sama</li>
-<li>Modernisasi Pengelolaan</li>
-<li>Indeks Akurasi Proyeksi Pengesahan Pendapatan dan Belanja BLU</li>
-<li>Manajemen Risiko</li>
-<li>Tata Kelola Keuangan Efektif, Efisien, dan Akuntabel</li>
-<li>Penilaian KAP</li>
-<li>Penilaian SAKIP</li>
-<li>Penilaian Maturity Rating</li>
-<li>Peningkatan Kapasitas Pegawai</li>
-
+                        <li>Margin EBITDA</li>
+                        <li>Realisasi Pendapatan Operasional BLU</li>
+                        <li>Jumlah Pendapatan BLU dari Optimalisasi Aset dan Kerja Sama</li>
+                        <li>Modernisasi Pengelolaan</li>
+                        <li>Indeks Akurasi Proyeksi Pengesahan Pendapatan dan Belanja BLU</li>
+                        <li>Manajemen Risiko</li>
+                        <li>Tata Kelola Keuangan Efektif, Efisien, dan Akuntabel</li>
+                        <li>Penilaian KAP</li>
+                        <li>Penilaian SAKIP</li>
+                        <li>Penilaian Maturity Rating</li>
+                        <li>Peningkatan Kapasitas Pegawai</li>
                     </ul>
                     <div class="iku-button-container">
-                        <a href="https://drive.google.com/file/d/1lu4alL-Jw67ZmPAEgiIfii10RcxsxCSy/view?usp=sharing" class="download-btn btn-iku"><i class="fas fa-file-pdf"></i>Unduh Detail IKU</a>
+                        <a href="https://drive.google.com/drive/folders/1n20MvffeKrQVrJBzFlqYyRLQqw8LpTud" class="download-btn btn-iku"><i class="fas fa-file-pdf"></i>Unduh Detail IKU</a>
                     </div>
                 </div>
             </div>
@@ -367,10 +341,10 @@
                 offset: 50,
             });
 
-            // [BARU] Update tahun di footer secara dinamis
+            // Update tahun di footer secara dinamis
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Logika untuk Modal Pop-up
+            // [DIKEMBALIKAN] Logika untuk Modal Pop-up
             const openModalButtons = document.querySelectorAll('[data-modal-target]');
             const overlay = document.getElementById('modal-overlay');
             const modal = document.getElementById('info-modal');
@@ -378,7 +352,6 @@
             const modalTitle = document.getElementById('modal-title');
             const modalBody = document.getElementById('modal-body');
 
-            // [DIPERBAIKI & DIRAPIKAN] Konten untuk setiap modal
             const modalContent = {
                 'sejarah': {
                     title: 'Sejarah Poltekkes Kemenkes Kupang',
@@ -468,7 +441,6 @@
             closeModalButton.addEventListener('click', closeModal);
             overlay.addEventListener('click', closeModal);
 
-            // [BARU] Menutup modal dengan tombol Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
@@ -479,4 +451,3 @@
 
 </body>
 </html>
-
