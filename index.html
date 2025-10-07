@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Kinerja Wadir 2 | Poltekkes Kemenkes Kupang</title>
+
+    <!-- Google Fonts: Poppins untuk tipografi modern -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome untuk ikon-ikon menarik -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+
+    <!-- AOS (Animate On Scroll) Library untuk animasi halus -->
+    <link rel="stylesheet" href="https://unpkg.com/aos@next/dist/aos.css" />
+
+    <style>
+        /* CSS Variables untuk Tema Warna Terang */
+        :root {
+            /* Gradasi Latar Belakang: Putih -> Biru -> Hijau */
+            --bg-gradient-start: #ffffff; /* Putih */
+            --bg-gradient-mid: #e0f7fa;   /* Biru Muda Pucat (Cyan) */
+            --bg-gradient-end: #e8f5e9;   /* Hijau Muda Pucat (Mint) */
+            
+            /* Latar Kartu */
+            --card-bg: rgba(255, 255, 255, 0.7); 
+            --card-border: rgba(0, 0, 0, 0.1);
+            
+            /* Warna Teks & Aksen */
+            --text-dark: #2c3e50; /* Warna teks utama yang gelap */
+            --text-muted: #555555;   /* Warna teks sekunder */
+            --primary-accent: #0D47A1; /* Biru tua profesional */
+
+            /* Tema Warna per Dokumen (tetap colorful) */
+            --color-rkt: #0096C7;     /* Biru */
+            --color-aksi: #00AFB9;    /* Teal/Hijau laut */
+            --color-laporan: #F4A261; /* Oranye Pasir */
+        }
+
+        /* CSS Reset & Pengaturan Dasar */
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html { scroll-behavior: smooth; }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: linear-gradient(135deg, var(--bg-gradient-start), var(--bg-gradient-mid), var(--bg-gradient-end));
+            background-attachment: fixed;
+            color: var(--text-dark);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 20px; }
+
+        /* Header yang Diperbarui */
+        .header {
+            text-align: center;
+            padding: 60px 20px;
+        }
+
+        .header-logo {
+            max-width: 100px; /* Atur ukuran logo */
+            height: auto;
+            margin-bottom: 30px;
+            transition: transform 0.3s ease;
+        }
+        .header-logo:hover {
+            transform: scale(1.1);
+        }
+
+        .header h1 {
+            font-size: 3.2rem;
+            color: var(--primary-accent);
+            font-weight: 700;
+            margin-bottom: 10px;
+        }
+
+        .header p.subtitle {
+            font-size: 1.2rem;
+            color: var(--text-muted);
+            font-weight: 300;
+            margin-bottom: 40px;
+        }
+
+        /* Bagian Profil Baru */
+        .profile-section {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            background: rgba(255, 255, 255, 0.5);
+            padding: 20px;
+            border-radius: 100px;
+            max-width: 500px;
+            margin: 0 auto;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.05);
+        }
+        .profile-photo {
+            width: 90px;
+            height: 90px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 4px solid var(--primary-accent);
+        }
+        .profile-identity {
+            text-align: left;
+        }
+        .profile-identity h4 {
+            margin: 0;
+            font-size: 1.4rem;
+            color: var(--text-dark);
+            font-weight: 600;
+        }
+        .profile-identity p {
+            margin: 0;
+            color: var(--text-muted);
+        }
+
+
+        /* Judul Section */
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 50px;
+            font-weight: 600;
+            color: var(--primary-accent);
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            width: 100px;
+            height: 4px;
+            background: var(--primary-accent);
+            border-radius: 2px;
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        /* Kartu Konten */
+        .card {
+            background: var(--card-bg);
+            backdrop-filter: blur(10px);
+            -webkit-backdrop-filter: blur(10px);
+            padding: 30px;
+            border-radius: 20px;
+            border: 1px solid var(--card-border);
+            box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.12);
+        }
+
+        /* Kartu IKU */
+        .iku-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .iku-card h3 { font-size: 1.6rem; margin-bottom: 15px; color: var(--text-dark); display: flex; align-items: center; }
+        .iku-card h3 i { font-size: 2rem; margin-right: 15px; color: var(--primary-accent); }
+        .iku-card ul { list-style: none; padding-left: 0; }
+        .iku-card ul li { margin-bottom: 10px; color: var(--text-muted); position: relative; padding-left: 30px; }
+        .iku-card ul li::before { content: '\f058'; font-family: 'Font Awesome 6 Free'; font-weight: 900; position: absolute; left: 0; color: #2a9d8f; }
+
+        /* Kartu Dokumen */
+        .document-card { margin-bottom: 30px; display: flex; align-items: center; gap: 30px; }
+        .doc-icon { font-size: 3rem; flex-shrink: 0; width: 70px; height: 70px; display: grid; place-items: center; border-radius: 15px; }
+        .document-content h3 { font-size: 1.8rem; margin-bottom: 5px; }
+        .document-content p { color: var(--text-muted); }
+        .download-btn { display: inline-block; color: #fff; padding: 12px 28px; border-radius: 50px; text-decoration: none; font-weight: 600; transition: transform 0.3s ease, box-shadow 0.3s ease; white-space: nowrap; margin-left: auto; border: none; }
+        .download-btn i { margin-right: 10px; }
+        .download-btn:hover { transform: translateY(-5px); }
+
+        /* Tema Warna Dokumen */
+        .card-rkt .doc-icon { background-color: var(--color-rkt); color: white; }
+        .card-rkt h3 { color: var(--color-rkt); }
+        .btn-rkt { background: var(--color-rkt); }
+        .btn-rkt:hover { box-shadow: 0 5px 20px rgba(0, 150, 199, 0.4); }
+
+        .card-aksi .doc-icon { background-color: var(--color-aksi); color: white; }
+        .card-aksi h3 { color: var(--color-aksi); }
+        .btn-aksi { background: var(--color-aksi); }
+        .btn-aksi:hover { box-shadow: 0 5px 20px rgba(0, 175, 185, 0.4); }
+
+        .card-laporan .doc-icon { background-color: var(--color-laporan); color: white; }
+        .card-laporan h3 { color: var(--color-laporan); }
+        .btn-laporan { background: var(--color-laporan); }
+        .btn-laporan:hover { box-shadow: 0 5px 20px rgba(244, 162, 97, 0.4); }
+
+        /* Footer */
+        footer { text-align: center; padding: 30px; margin-top: 40px; color: var(--text-muted); font-size: 0.9rem; }
+        
+        /* Responsivitas */
+        @media (max-width: 768px) {
+            .header h1 { font-size: 2.5rem; }
+            .profile-section { flex-direction: column; text-align: center; border-radius: 20px; padding: 30px; }
+            .profile-identity { text-align: center; }
+            .document-card { flex-direction: column; text-align: center; gap: 20px; }
+            .download-btn { margin-left: 0; margin-top: 15px; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Bagian Header Utama -->
+    <header class="header" data-aos="fade-down" data-aos-duration="1000">
+        <div class="container">
+            <!-- GANTI DENGAN URL TUJUAN & URL GAMBAR LOGO ANDA -->
+            <a href="https://poltekkeskupang.ac.id/" target="_blank">
+                <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/7/77/Lambang_Poltekkes_Kemenkes.png/681px-Lambang_Poltekkes_Kemenkes.png" alt="Logo Poltekkes Kemenkes Kupang" class="header-logo">
+            </a>
+
+            <h1>Dashboard Kinerja Digital</h1>
+            <p class="subtitle">Wakil Direktur II - Poltekkes Kemenkes Kupang</p>
+            
+            <!-- Bagian Profil Pejabat -->
+            <div class="profile-section">
+                <!-- GANTI DENGAN URL FOTO ANDA (sebaiknya rasio 1:1) -->
+                <img src="https://via.placeholder.com/150" alt="Foto Profil Wakil Direktur 2" class="profile-photo">
+                <div class="profile-identity">
+                    <h4>Nama Pejabat, S.E, M.Si.</h4>
+                    <p>Wakil Direktur Bidang Umum dan Keuangan</p>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <main class="container">
+
+        <!-- Bagian Indikator Kinerja Utama (IKU) -->
+        <section id="iku">
+            <h2 class="section-title" data-aos="fade-up">Indikator Kinerja Utama</h2>
+            <div class="iku-grid">
+                <div class="card iku-card" data-aos="fade-right" data-aos-delay="200">
+                    <h3><i class="fas fa-university"></i>IKU Poltekkes</h3>
+                    <ul>
+                        <li>Lulusan Mendapat Pekerjaan yang Layak</li>
+                        <li>Mahasiswa Berkegiatan di Luar Kampus</li>
+                        <li>Dosen Berkegiatan di Luar Kampus</li>
+                        <li>Praktisi Mengajar di Kampus</li>
+                        <li>Hasil Kerja Dosen Bermanfaat bagi Masyarakat</li>
+                    </ul>
+                </div>
+                <div class="card iku-card" data-aos="fade-left" data-aos-delay="400">
+                    <h3><i class="fas fa-user-tie"></i>IKU Wadir 2</h3>
+                    <ul>
+                        <li>Peningkatan Kualitas Tata Kelola Keuangan</li>
+                        <li>Optimalisasi Aset dan Sarana Prasarana</li>
+                        <li>Pengembangan Sumber Daya Manusia Unggul</li>
+                        <li>Realisasi Anggaran Tepat Waktu & Sasaran</li>
+                        <li>Peningkatan Kepuasan Layanan Internal</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Bagian Dokumen Kinerja -->
+        <section id="dokumen">
+             <h2 class="section-title" data-aos="fade-up" data-aos-delay="100">Pusat Dokumen Kinerja</h2>
+            
+            <!-- Dokumen: RKT -->
+            <div class="card document-card card-rkt" data-aos="zoom-in-up" data-aos-delay="200">
+                <div class="doc-icon"><i class="fas fa-bullseye"></i></div>
+                <div class="document-content">
+                    <h3>Rencana Kinerja Tahunan (RKT)</h3>
+                    <p>Rincian target kinerja tahunan yang menjadi acuan utama bagi seluruh unit di bawah Wakil Direktur 2.</p>
+                </div>
+                <!-- Ganti '#' dengan link file Anda -->
+                <a href="#" class="download-btn btn-rkt"><i class="fas fa-download"></i>Unduh RKT</a>
+            </div>
+
+            <!-- Dokumen: Rencana Aksi -->
+            <div class="card document-card card-aksi" data-aos="zoom-in-up" data-aos-delay="300">
+                <div class="doc-icon"><i class="fas fa-tasks"></i></div>
+                <div class="document-content">
+                    <h3>Rencana Aksi Kinerja</h3>
+                    <p>Langkah-langkah strategis dan operasional untuk mencapai target yang telah ditetapkan dalam RKT.</p>
+                </div>
+                <!-- Ganti '#' dengan link file Anda -->
+                <a href="#" class="download-btn btn-aksi"><i class="fas fa-file-alt"></i>Lihat Rencana</a>
+            </div>
+
+            <!-- Dokumen: Laporan Kinerja -->
+            <div class="card document-card card-laporan" data-aos="zoom-in-up" data-aos-delay="400">
+                <div class="doc-icon"><i class="fas fa-chart-pie"></i></div>
+                <div class="document-content">
+                    <h3>Laporan Kinerja</h3>
+                    <p>Sajian data hasil evaluasi dan pencapaian kinerja berdasarkan target yang telah ditetapkan sebelumnya.</p>
+                </div>
+                <!-- Ganti '#' dengan link file Anda -->
+                <a href="#" class="download-btn btn-laporan"><i class="fas fa-chart-line"></i>Baca Laporan</a>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2023 | Dikelola oleh Tim Wakil Direktur II Poltekkes Kemenkes Kupang</p>
+    </footer>
+
+    <!-- JavaScript untuk AOS (Animate On Scroll) -->
+    <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 800,
+            once: true,
+            offset: 50,
+        });
+    </script>
+
+</body>
+</html>
