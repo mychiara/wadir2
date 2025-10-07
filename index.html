@@ -94,18 +94,18 @@
         .btn-iku { background-color: var(--primary-accent); margin-left: 0; }
         .btn-iku:hover { box-shadow: 0 5px 20px rgba(13, 71, 161, 0.4); }
         
-        /* [BARU] Tema Warna Ikon Dokumen */
         .card-rkt .doc-icon { background: rgba(0, 150, 199, 0.1); color: var(--color-rkt); }
         .card-aksi .doc-icon { background: rgba(0, 175, 185, 0.1); color: var(--color-aksi); }
         .card-laporan .doc-icon { background: rgba(244, 162, 97, 0.1); color: var(--color-laporan); }
 
-        /* Style untuk Kartu Informasi & Grid */
+        /* [DIUBAH] Style untuk Kartu Informasi & Grid 2x2 */
         .info-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: 1fr; /* Default 1 kolom untuk mobile */
             gap: 30px;
             margin-bottom: 60px;
         }
+        
         .info-card {
             text-align: center;
             cursor: pointer;
@@ -209,9 +209,16 @@
             .profile-identity { text-align: center; }
             .document-card { flex-direction: column; text-align: center; gap: 20px; }
             .download-btn { margin-left: 0; margin-top: 15px; }
-            .info-grid { grid-template-columns: 1fr; }
+            /* .info-grid sudah default 1 kolom, jadi tidak perlu diubah di sini */
             .modal { width: 95%; padding: 20px; }
             .modal-title { font-size: 1.5rem; }
+        }
+
+        /* [BARU] Media Query untuk layout grid 2x2 di layar lebar */
+        @media (min-width: 769px) {
+            .info-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
         }
     </style>
 </head>
@@ -236,29 +243,30 @@
 
     <main class="container">
 
-        <!-- Bagian Info Sejarah, Visi & Misi -->
-        <section id="profil-institusi">
+        <!-- [DIUBAH] Bagian Info Institusi dengan layout 2x2 -->
+        <section id="info-institusi">
+            <h2 class="section-title" data-aos="fade-up">Profil & Pedoman Institusi</h2>
             <div class="info-grid">
                 <!-- Kartu Sejarah -->
-                <div class="card info-card" data-aos="fade-right" data-modal-target="sejarah">
+                <div class="card info-card" data-aos="fade-right" data-aos-delay="100" data-modal-target="sejarah">
                     <div class="info-icon"><i class="fas fa-landmark"></i></div>
                     <h3>Sejarah</h3>
                     <p>Perjalanan Poltekkes Kupang dari awal berdiri hingga kini.</p>
                 </div>
                 <!-- Kartu Visi Misi -->
-                <div class="card info-card" data-aos="fade-up" data-modal-target="visi-misi">
+                <div class="card info-card" data-aos="fade-left" data-aos-delay="200" data-modal-target="visi-misi">
                     <div class="info-icon"><i class="fas fa-bullseye"></i></div>
                     <h3>Visi & Misi</h3>
                     <p>Arah dan tujuan jangka panjang institusi kami.</p>
                 </div>
                  <!-- Kartu Renstra -->
-                <div class="card info-card" data-aos="fade-down" data-modal-target="renstra">
+                <div class="card info-card" data-aos="fade-right" data-aos-delay="300" data-modal-target="renstra">
                     <div class="info-icon"><i class="fas fa-sitemap"></i></div>
                     <h3>Rencana Strategis</h3>
                     <p>Peta jalan strategis untuk mencapai visi dan misi institusi.</p>
                 </div>
                 <!-- Kartu Moto & Layanan -->
-                <div class="card info-card" data-aos="fade-left" data-modal-target="moto-layanan">
+                <div class="card info-card" data-aos="fade-left" data-aos-delay="400" data-modal-target="moto-layanan">
                     <div class="info-icon"><i class="fas fa-hands-holding-circle"></i></div>
                     <h3>Moto & Layanan</h3>
                     <p>Semangat kami dalam memberikan pelayanan terbaik.</p>
@@ -349,17 +357,14 @@
     <script src="https://unpkg.com/aos@next/dist/aos.js" defer></script>
     <script>
         document.addEventListener("DOMContentLoaded", function() {
-            // Inisialisasi AOS (Animate On Scroll)
             AOS.init({
                 duration: 800,
                 once: true,
                 offset: 50,
             });
 
-            // [BARU] Update tahun di footer secara dinamis
             document.getElementById('current-year').textContent = new Date().getFullYear();
 
-            // Logika untuk Modal Pop-up
             const openModalButtons = document.querySelectorAll('[data-modal-target]');
             const overlay = document.getElementById('modal-overlay');
             const modal = document.getElementById('info-modal');
@@ -367,7 +372,6 @@
             const modalTitle = document.getElementById('modal-title');
             const modalBody = document.getElementById('modal-body');
 
-            // [DIPERBAIKI & DIRAPIKAN] Konten untuk setiap modal
             const modalContent = {
                 'sejarah': {
                     title: 'Sejarah Poltekkes Kemenkes Kupang',
@@ -457,7 +461,6 @@
             closeModalButton.addEventListener('click', closeModal);
             overlay.addEventListener('click', closeModal);
 
-            // [BARU] Menutup modal dengan tombol Escape
             document.addEventListener('keydown', (e) => {
                 if (e.key === 'Escape' && modal.classList.contains('active')) {
                     closeModal();
